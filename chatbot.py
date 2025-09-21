@@ -981,7 +981,7 @@ if __name__ == "__main__":
     print(f"Max images: {MAX_IMAGES}")
 
     uvicorn.run(
-        app,
+        "chatbot:app",
         host="0.0.0.0",  # Accept requests from anywhere
         port=int(os.environ.get("PORT", 8000)),  # Use Render-assigned port
     )
