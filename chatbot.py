@@ -969,15 +969,21 @@ async def get_stats():
 
 if __name__ == "__main__":
     import uvicorn
-    
+    import os
+
     if not os.getenv("GOOGLE_API_KEY"):
         print("ERROR: GOOGLE_API_KEY environment variable not set!")
         exit(1)
-    
+
     print("Starting Enhanced AI Legal Assistant API server...")
     print(f"Vision API available: {vision_client is not None}")
     print(f"Max PDF pages: {MAX_PDF_PAGES}")
     print(f"Max images: {MAX_IMAGES}")
-    
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+
+    uvicorn.run(
+        app,
+        host="0.0.0.0",  # Accept requests from anywhere
+        port=int(os.environ.get("PORT", 8000)),  # Use Render-assigned port
+    )
+
 
